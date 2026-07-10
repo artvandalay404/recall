@@ -19,6 +19,13 @@ struct DeckListView: View {
         }
         .navigationTitle("Decks")
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                NavigationLink {
+                    BrowseView()
+                } label: {
+                    Label("Browse", systemImage: "magnifyingglass")
+                }
+            }
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     newDeckName = ""

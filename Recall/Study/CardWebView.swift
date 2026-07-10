@@ -7,12 +7,13 @@ import WebKit
 /// would reintroduce the flip-latency the PRD calls out as a risk.
 struct CardWebView: UIViewRepresentable {
     let html: String
+    var baseURL: URL?
 
     func makeUIView(context: Context) -> WKWebView {
         WKWebView()
     }
 
     func updateUIView(_ webView: WKWebView, context: Context) {
-        webView.loadHTMLString(html, baseURL: nil)
+        webView.loadHTMLString(html, baseURL: baseURL)
     }
 }

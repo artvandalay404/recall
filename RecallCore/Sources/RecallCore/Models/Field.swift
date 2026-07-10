@@ -24,4 +24,9 @@ public struct Field: Codable, Equatable, Identifiable, Sendable {
 
 extension Field: FetchableRecord, PersistableRecord {
     public static let databaseTableName = "field"
+
+    public enum Columns {
+        static let noteTypeID = Column(CodingKeys.noteTypeID)
+        static let ordinal = Column(CodingKeys.ordinal)
+    }
 }

@@ -6,8 +6,10 @@ struct StudySessionView: View {
     let deckName: String
 
     @Environment(\.appDatabase) private var database
+    @Environment(\.mediaStore) private var mediaStore
     @State private var viewModel: StudyViewModel?
     @State private var loadError: String?
+    @State private var isPresentingNoteEditor = false
 
     var body: some View {
         Group {
@@ -25,13 +27,30 @@ struct StudySessionView: View {
         }
         .navigationTitle(deckName)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    isPresentingNoteEditor = true
+                } label: {
+                    Label("Add Note", systemImage: "plus")
+                }
+            }
+        }
+        .sheet(isPresented: $isPresentingNoteEditor, onDismiss: loadSession) {
+            NoteEditorView(deckID: deckID)
+        }
         .onAppear {
             guard viewModel == nil else { return }
-            do {
-                viewModel = try StudyViewModel(database: database, deckID: deckID)
-            } catch {
-                loadError = error.localizedDescription
-            }
+            loadSession()
+        }
+    }
+
+    private func loadSession() {
+        do {
+            viewModel = try StudyViewModel(database: database, deckID: deckID)
+            loadError = nil
+        } catch {
+            loadError = error.localizedDescription
         }
     }
 
@@ -43,7 +62,10 @@ struct StudySessionView: View {
             VStack(spacing: 0) {
                 header(viewModel)
 
-                CardWebView(html: viewModel.phase == .question ? viewModel.questionHTML : viewModel.answerHTML)
+                CardWebView(
+                    html: viewModel.phase == .question ? viewModel.questionHTML : viewModel.answerHTML,
+                    baseURL: mediaStore.directory
+                )
                     .overlay {
                         if viewModel.phase == .question {
                             Color.clear

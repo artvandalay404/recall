@@ -9,28 +9,40 @@
 /* Begin PBXBuildFile section */
 		028D3CCAD94808A0ADB691C2 /* DemoSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB19664F2D261C106A31D38 /* DemoSeeder.swift */; };
 		161C9F94D8FCC9160A802259 /* StudySessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A56D902EC57BB3625BD8 /* StudySessionView.swift */; };
+		3F0B37473F5959E0D246CD82 /* FieldEditorWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B7338BB563AC4538B79A35 /* FieldEditorWebView.swift */; };
+		46C9154079D83865DD5657D9 /* MediaStoreEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA89A5CCB53833EDF3E919EA /* MediaStoreEnvironment.swift */; };
+		4B3E49009F62C51F9E89DE48 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DCBCD72427CACE8A659CBF /* NoteEditorView.swift */; };
 		6E18B10F6997740BADB4C3B4 /* DeckListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */; };
 		776EFE5677AAFF0922CEA6B5 /* RecallCore in Frameworks */ = {isa = PBXBuildFile; productRef = B8AE631ADA6BB62C7C0E9392 /* RecallCore */; };
+		89466641C1C7170D4AE512AA /* NoteEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488B9465F6E911623BBB4CA2 /* NoteEditorViewModel.swift */; };
 		89E68222C5DF6B9A10B498EC /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1158AA44AEC2FA15B9AC07 /* DeckListView.swift */; };
 		B783DF3B931FAB9E3D89ADA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4646E22534FFA6986EBF387 /* Assets.xcassets */; };
 		BAA10D066C94E7388F660A23 /* RecallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */; };
 		BCB7E0F4F2B0A75BF4992D25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A48E40372E86D60ADC3F5B /* ContentView.swift */; };
+		CA791509CE1C7B8105A317B1 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37B1445B146193EF1F9612A /* BrowseViewModel.swift */; };
 		D1FE319905C54CF237EE20B3 /* AppDatabaseEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */; };
 		D3819BD30C912FDAFE5E9ACA /* StudyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15656707A9C43E6AE58469D4 /* StudyViewModel.swift */; };
+		F985DA947D192418858B7EDA /* BrowseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FD0E9129088A39B17FEC1 /* BrowseView.swift */; };
 		FBCEB1655C2BE282D06E389D /* CardWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F9DEDCAE7845BA023B739 /* CardWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0243A56D902EC57BB3625BD8 /* StudySessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionView.swift; sourceTree = "<group>"; };
+		12B7338BB563AC4538B79A35 /* FieldEditorWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldEditorWebView.swift; sourceTree = "<group>"; };
 		15656707A9C43E6AE58469D4 /* StudyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewModel.swift; sourceTree = "<group>"; };
-		36DC1AF870A74A8054544ECB /* RecallCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RecallCore; path = RecallCore; sourceTree = SOURCE_ROOT; };
+		36DC1AF870A74A8054544ECB /* RecallCore */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RecallCore; sourceTree = SOURCE_ROOT; };
 		47A48E40372E86D60ADC3F5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		488B9465F6E911623BBB4CA2 /* NoteEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewModel.swift; sourceTree = "<group>"; };
 		4D1158AA44AEC2FA15B9AC07 /* DeckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
-		589D612419DE8AD691D1CD7C /* Recall.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Recall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		589D612419DE8AD691D1CD7C /* Recall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AB19664F2D261C106A31D38 /* DemoSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSeeder.swift; sourceTree = "<group>"; };
 		90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabaseEnvironment.swift; sourceTree = "<group>"; };
 		915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListViewModel.swift; sourceTree = "<group>"; };
+		A37B1445B146193EF1F9612A /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
+		A58FD0E9129088A39B17FEC1 /* BrowseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseView.swift; sourceTree = "<group>"; };
+		BA89A5CCB53833EDF3E919EA /* MediaStoreEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaStoreEnvironment.swift; sourceTree = "<group>"; };
 		C4646E22534FFA6986EBF387 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C8DCBCD72427CACE8A659CBF /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
 		E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallApp.swift; sourceTree = "<group>"; };
 		EB3F9DEDCAE7845BA023B739 /* CardWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,8 +75,10 @@
 				C4646E22534FFA6986EBF387 /* Assets.xcassets */,
 				47A48E40372E86D60ADC3F5B /* ContentView.swift */,
 				E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */,
+				8A0A171748FB15BE1AC1C592 /* Browse */,
 				B22809D32BCA10019C467CE8 /* Database */,
 				FE03CF3F85B50E9568C7F26B /* Decks */,
+				FEC535B6ABA77FBD5E61385A /* Editor */,
 				12EA2FFC55792AAE79635BA3 /* Study */,
 				9DB846D27360EC15940B4FE3 /* Support */,
 			);
@@ -77,6 +91,15 @@
 				36DC1AF870A74A8054544ECB /* RecallCore */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		8A0A171748FB15BE1AC1C592 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				A58FD0E9129088A39B17FEC1 /* BrowseView.swift */,
+				A37B1445B146193EF1F9612A /* BrowseViewModel.swift */,
+			);
+			path = Browse;
 			sourceTree = "<group>";
 		};
 		8FB9A9AFFDDAA5852104C602 /* Products */ = {
@@ -99,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */,
+				BA89A5CCB53833EDF3E919EA /* MediaStoreEnvironment.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -119,6 +143,16 @@
 				915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */,
 			);
 			path = Decks;
+			sourceTree = "<group>";
+		};
+		FEC535B6ABA77FBD5E61385A /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				12B7338BB563AC4538B79A35 /* FieldEditorWebView.swift */,
+				C8DCBCD72427CACE8A659CBF /* NoteEditorView.swift */,
+				488B9465F6E911623BBB4CA2 /* NoteEditorViewModel.swift */,
+			);
+			path = Editor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,8 +186,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = F160EB2FBD6BB340B9EC6B11 /* Build configuration list for PBXProject "Recall" */;
 			developmentRegion = en;
@@ -194,11 +226,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1FE319905C54CF237EE20B3 /* AppDatabaseEnvironment.swift in Sources */,
+				F985DA947D192418858B7EDA /* BrowseView.swift in Sources */,
+				CA791509CE1C7B8105A317B1 /* BrowseViewModel.swift in Sources */,
 				FBCEB1655C2BE282D06E389D /* CardWebView.swift in Sources */,
 				BCB7E0F4F2B0A75BF4992D25 /* ContentView.swift in Sources */,
 				89E68222C5DF6B9A10B498EC /* DeckListView.swift in Sources */,
 				6E18B10F6997740BADB4C3B4 /* DeckListViewModel.swift in Sources */,
 				028D3CCAD94808A0ADB691C2 /* DemoSeeder.swift in Sources */,
+				3F0B37473F5959E0D246CD82 /* FieldEditorWebView.swift in Sources */,
+				46C9154079D83865DD5657D9 /* MediaStoreEnvironment.swift in Sources */,
+				4B3E49009F62C51F9E89DE48 /* NoteEditorView.swift in Sources */,
+				89466641C1C7170D4AE512AA /* NoteEditorViewModel.swift in Sources */,
 				BAA10D066C94E7388F660A23 /* RecallApp.swift in Sources */,
 				161C9F94D8FCC9160A802259 /* StudySessionView.swift in Sources */,
 				D3819BD30C912FDAFE5E9ACA /* StudyViewModel.swift in Sources */,
@@ -334,6 +372,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9T7Y7HUM8R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,7 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.recall.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipflops.ios;
 				PRODUCT_NAME = Recall;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
@@ -359,6 +398,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9T7Y7HUM8R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -369,7 +409,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.recall.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flipflops.ios;
 				PRODUCT_NAME = Recall;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 6.0;
