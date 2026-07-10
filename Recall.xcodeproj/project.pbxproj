@@ -7,18 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		028D3CCAD94808A0ADB691C2 /* DemoSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB19664F2D261C106A31D38 /* DemoSeeder.swift */; };
+		161C9F94D8FCC9160A802259 /* StudySessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243A56D902EC57BB3625BD8 /* StudySessionView.swift */; };
+		6E18B10F6997740BADB4C3B4 /* DeckListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */; };
 		776EFE5677AAFF0922CEA6B5 /* RecallCore in Frameworks */ = {isa = PBXBuildFile; productRef = B8AE631ADA6BB62C7C0E9392 /* RecallCore */; };
+		89E68222C5DF6B9A10B498EC /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1158AA44AEC2FA15B9AC07 /* DeckListView.swift */; };
 		B783DF3B931FAB9E3D89ADA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4646E22534FFA6986EBF387 /* Assets.xcassets */; };
 		BAA10D066C94E7388F660A23 /* RecallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */; };
 		BCB7E0F4F2B0A75BF4992D25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A48E40372E86D60ADC3F5B /* ContentView.swift */; };
+		D1FE319905C54CF237EE20B3 /* AppDatabaseEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */; };
+		D3819BD30C912FDAFE5E9ACA /* StudyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15656707A9C43E6AE58469D4 /* StudyViewModel.swift */; };
+		FBCEB1655C2BE282D06E389D /* CardWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F9DEDCAE7845BA023B739 /* CardWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0243A56D902EC57BB3625BD8 /* StudySessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionView.swift; sourceTree = "<group>"; };
+		15656707A9C43E6AE58469D4 /* StudyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewModel.swift; sourceTree = "<group>"; };
 		36DC1AF870A74A8054544ECB /* RecallCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RecallCore; path = RecallCore; sourceTree = SOURCE_ROOT; };
 		47A48E40372E86D60ADC3F5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4D1158AA44AEC2FA15B9AC07 /* DeckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
 		589D612419DE8AD691D1CD7C /* Recall.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Recall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AB19664F2D261C106A31D38 /* DemoSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSeeder.swift; sourceTree = "<group>"; };
+		90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabaseEnvironment.swift; sourceTree = "<group>"; };
+		915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListViewModel.swift; sourceTree = "<group>"; };
 		C4646E22534FFA6986EBF387 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallApp.swift; sourceTree = "<group>"; };
+		EB3F9DEDCAE7845BA023B739 /* CardWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,12 +47,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12EA2FFC55792AAE79635BA3 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				EB3F9DEDCAE7845BA023B739 /* CardWebView.swift */,
+				0243A56D902EC57BB3625BD8 /* StudySessionView.swift */,
+				15656707A9C43E6AE58469D4 /* StudyViewModel.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
 		2398648CEC1DEFD2236E8232 /* Recall */ = {
 			isa = PBXGroup;
 			children = (
 				C4646E22534FFA6986EBF387 /* Assets.xcassets */,
 				47A48E40372E86D60ADC3F5B /* ContentView.swift */,
 				E55FB9A4BE83E6136E1CEBB3 /* RecallApp.swift */,
+				B22809D32BCA10019C467CE8 /* Database */,
+				FE03CF3F85B50E9568C7F26B /* Decks */,
+				12EA2FFC55792AAE79635BA3 /* Study */,
+				9DB846D27360EC15940B4FE3 /* Support */,
 			);
 			path = Recall;
 			sourceTree = "<group>";
@@ -59,6 +87,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9DB846D27360EC15940B4FE3 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				5AB19664F2D261C106A31D38 /* DemoSeeder.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		B22809D32BCA10019C467CE8 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				90336EA3844D17445EC7DB92 /* AppDatabaseEnvironment.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		E3D300D57C7BE46807A96B09 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +110,15 @@
 				2398648CEC1DEFD2236E8232 /* Recall */,
 				8FB9A9AFFDDAA5852104C602 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		FE03CF3F85B50E9568C7F26B /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				4D1158AA44AEC2FA15B9AC07 /* DeckListView.swift */,
+				915AE24F5E7573EDB1048141 /* DeckListViewModel.swift */,
+			);
+			path = Decks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +193,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1FE319905C54CF237EE20B3 /* AppDatabaseEnvironment.swift in Sources */,
+				FBCEB1655C2BE282D06E389D /* CardWebView.swift in Sources */,
 				BCB7E0F4F2B0A75BF4992D25 /* ContentView.swift in Sources */,
+				89E68222C5DF6B9A10B498EC /* DeckListView.swift in Sources */,
+				6E18B10F6997740BADB4C3B4 /* DeckListViewModel.swift in Sources */,
+				028D3CCAD94808A0ADB691C2 /* DemoSeeder.swift in Sources */,
 				BAA10D066C94E7388F660A23 /* RecallApp.swift in Sources */,
+				161C9F94D8FCC9160A802259 /* StudySessionView.swift in Sources */,
+				D3819BD30C912FDAFE5E9ACA /* StudyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

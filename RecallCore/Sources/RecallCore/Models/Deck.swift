@@ -2,7 +2,7 @@ import GRDB
 import Foundation
 
 /// A deck of cards. Decks nest via `parentID` to form subdecks.
-public struct Deck: Codable, Equatable, Identifiable, Sendable {
+public struct Deck: Codable, Equatable, Hashable, Identifiable, Sendable {
     public var id: String
     public var parentID: String?
     public var name: String

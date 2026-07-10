@@ -11,6 +11,9 @@ public struct AppDatabase: Sendable {
     public init(_ dbWriter: any DatabaseWriter) throws {
         self.dbWriter = dbWriter
         try Self.migrator.migrate(dbWriter)
+        try dbWriter.write { db in
+            try BuiltInNoteTypes.seedIfNeeded(in: db)
+        }
     }
 
     /// An in-memory database, useful for previews and tests.

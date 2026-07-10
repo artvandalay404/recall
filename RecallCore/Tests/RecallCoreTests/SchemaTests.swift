@@ -14,12 +14,12 @@ struct SchemaTests {
 
     @Test func fullHierarchyRoundTripsThroughTheDatabase() throws {
         let db = try AppDatabase.inMemory()
+        let noteType = NoteType(name: "Basic", kind: .basic)
 
         try db.dbWriter.write { db in
             let deck = Deck(name: "Spanish")
             try deck.insert(db)
 
-            let noteType = NoteType(name: "Basic", kind: .basic)
             try noteType.insert(db)
 
             let front = Field(noteTypeID: noteType.id, name: "Front", ordinal: 0)
@@ -58,7 +58,7 @@ struct SchemaTests {
             let noteCount = try Note.fetchCount(db)
             #expect(noteCount == 1)
 
-            let fieldCount = try Field.fetchCount(db)
+            let fieldCount = try Field.filter(Column("noteTypeID") == noteType.id).fetchCount(db)
             #expect(fieldCount == 2)
         }
     }
