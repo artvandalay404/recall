@@ -112,6 +112,49 @@ public struct AppDatabase: Sendable {
             try db.create(index: "reviewLog_on_cardID", on: "reviewLog", columns: ["cardID"])
         }
 
+        migrator.registerMigration("v2Sync") { db in
+            // A per-card version so CloudKit sync (PRD §7.8) can resolve a
+            // conflicting save with "last-writer-wins per card" by comparing
+            // timestamps, mirroring `deck.updatedAt` / `note.updatedAt`.
+            try db.alter(table: "card") { t in
+                t.add(column: "updatedAt", .datetime).notNull().defaults(to: Date())
+            }
+
+            // The local outbox of not-yet-synced changes: every mutation to a
+            // synced table enqueues (or replaces) a row here in the same
+            // transaction, and SyncEngine drains it into CKSyncEngine's own
+            // pending-change tracking. Keyed by the record's own type + id so
+            // repeated edits before a sync collapse into one pending change.
+            try db.create(table: "pendingSyncChange") { t in
+                t.column("recordType", .text).notNull()
+                t.column("recordID", .text).notNull()
+                t.column("isDeletion", .boolean).notNull()
+                t.primaryKey(["recordType", "recordID"])
+            }
+
+            // Caches each synced row's last-known CKRecord system fields
+            // (id, change tag, etc. — never the app's own field values) via
+            // `CKRecord.encodeSystemFields`, so a resend after a fetch/save
+            // can mutate the exact record CloudKit last saw instead of
+            // colliding with a stale change tag.
+            try db.create(table: "syncRecordCache") { t in
+                t.column("recordType", .text).notNull()
+                t.column("recordID", .text).notNull()
+                t.column("systemFields", .blob).notNull()
+                t.primaryKey(["recordType", "recordID"])
+            }
+
+            // Tracks which media filenames (referenced by a note's field HTML,
+            // PRD §7.9) a note owns, so sync can upload/download each one as
+            // its own "MediaAsset" CKRecord (PRD §7.8's "media via CKAsset").
+            try db.create(table: "mediaAsset") { t in
+                t.column("filename", .text).primaryKey()
+                t.column("noteID", .text).notNull().references("note", onDelete: .cascade)
+                t.column("createdAt", .datetime).notNull()
+            }
+            try db.create(index: "mediaAsset_on_noteID", on: "mediaAsset", columns: ["noteID"])
+        }
+
         return migrator
     }
 }

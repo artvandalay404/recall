@@ -64,9 +64,13 @@ public extension AppDatabase {
 
             let note = Note(noteTypeID: noteTypeID, fieldValues: fieldValues, tags: tags)
             try note.insert(db)
+            try db.enqueueSyncChange(.note, recordID: note.id)
             for ordinal in ordinals {
-                try Card(noteID: note.id, deckID: deckID, templateOrdinal: ordinal, due: due).insert(db)
+                let card = Card(noteID: note.id, deckID: deckID, templateOrdinal: ordinal, due: due)
+                try card.insert(db)
+                try db.enqueueSyncChange(.card, recordID: card.id)
             }
+            try Self.registerMediaAssets(fieldValues: fieldValues, noteID: note.id, in: db)
             return note
         }
     }
@@ -89,25 +93,37 @@ public extension AppDatabase {
             updated.tags = tags
             updated.updatedAt = Date()
             try updated.update(db)
+            try db.enqueueSyncChange(.note, recordID: updated.id)
 
             let existingCards = try Card.filter(Card.Columns.noteID == note.id).fetchAll(db)
             let existingOrdinals = Set(existingCards.map(\.templateOrdinal))
 
             if let deckID = existingCards.first?.deckID {
                 for ordinal in desiredOrdinals.subtracting(existingOrdinals) {
-                    try Card(noteID: note.id, deckID: deckID, templateOrdinal: ordinal).insert(db)
+                    let card = Card(noteID: note.id, deckID: deckID, templateOrdinal: ordinal)
+                    try card.insert(db)
+                    try db.enqueueSyncChange(.card, recordID: card.id)
                 }
             }
             for card in existingCards where !desiredOrdinals.contains(card.templateOrdinal) {
                 try card.delete(db)
+                try db.enqueueSyncChange(.card, recordID: card.id, isDeletion: true)
             }
+            try Self.registerMediaAssets(fieldValues: fieldValues, noteID: updated.id, in: db)
 
             return updated
         }
     }
 
     func deleteNote(_ note: Note) throws {
-        _ = try dbWriter.write { db in try note.delete(db) }
+        _ = try dbWriter.write { db in
+            let cascadedCardIDs = try Card.filter(Card.Columns.noteID == note.id).fetchAll(db).map(\.id)
+            try note.delete(db)
+            try db.enqueueSyncChange(.note, recordID: note.id, isDeletion: true)
+            for cardID in cascadedCardIDs {
+                try db.enqueueSyncChange(.card, recordID: cardID, isDeletion: true)
+            }
+        }
     }
 
     // MARK: - Browse / search
@@ -163,6 +179,20 @@ public extension AppDatabase {
             return CardRenderer.clozeNumbers(in: fieldValues.first ?? "").map { $0 - 1 }
         case .basic:
             return try CardTemplate.filter(Column("noteTypeID") == noteType.id).fetchAll(db).map(\.ordinal)
+        }
+    }
+
+    /// Registers any media filename this note's field HTML references
+    /// (PRD §7.9) that isn't already tracked, so sync can mirror it to
+    /// CloudKit as its own "MediaAsset" CKRecord (PRD §7.8). Never removes a
+    /// filename a previous save registered — even if this edit drops the
+    /// reference, the file may still be in use elsewhere, and orphaned media
+    /// is cheap clutter in the user's own private database, not a bug.
+    private static func registerMediaAssets(fieldValues: [String], noteID: String, in db: Database) throws {
+        for filename in MediaReferenceScanner.filenames(in: fieldValues) {
+            guard try MediaAsset.fetchOne(db, key: filename) == nil else { continue }
+            try MediaAsset(filename: filename, noteID: noteID).insert(db)
+            try db.enqueueSyncChange(.mediaAsset, recordID: filename)
         }
     }
 

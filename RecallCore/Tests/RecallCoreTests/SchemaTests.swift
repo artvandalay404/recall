@@ -9,7 +9,10 @@ struct SchemaTests {
         let tables = try db.dbWriter.read { db in
             try String.fetchSet(db, sql: "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'grdb_%'")
         }
-        #expect(tables == ["library", "deck", "noteType", "field", "cardTemplate", "note", "card", "reviewLog"])
+        #expect(tables == [
+            "library", "deck", "noteType", "field", "cardTemplate", "note", "card", "reviewLog",
+            "pendingSyncChange", "syncRecordCache", "mediaAsset",
+        ])
     }
 
     @Test func fullHierarchyRoundTripsThroughTheDatabase() throws {

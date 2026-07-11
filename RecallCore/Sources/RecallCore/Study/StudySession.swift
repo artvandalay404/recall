@@ -86,6 +86,8 @@ public final class StudySession {
         try database.dbWriter.write { db in
             try updatedCard.update(db)
             try log.insert(db)
+            try db.enqueueSyncChange(.card, recordID: updatedCard.id)
+            try db.enqueueSyncChange(.reviewLog, recordID: log.id)
         }
 
         undoStack.append(UndoEntry(previousCard: card, insertedReviewLogID: log.id))
@@ -111,6 +113,8 @@ public final class StudySession {
         try database.dbWriter.write { db in
             try entry.previousCard.update(db)
             try db.execute(sql: "DELETE FROM reviewLog WHERE id = ?", arguments: [entry.insertedReviewLogID])
+            try db.enqueueSyncChange(.card, recordID: entry.previousCard.id)
+            try db.enqueueSyncChange(.reviewLog, recordID: entry.insertedReviewLogID, isDeletion: true)
         }
 
         queue.removeAll { $0.id == entry.previousCard.id }

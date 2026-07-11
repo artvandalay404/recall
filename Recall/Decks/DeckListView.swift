@@ -1,13 +1,23 @@
 import SwiftUI
+import UniformTypeIdentifiers
 import RecallCore
 
 struct DeckListView: View {
     @Environment(\.appDatabase) private var database
+    @Environment(\.mediaStore) private var mediaStore
     @State private var viewModel: DeckListViewModel?
     @State private var isPresentingNewDeckAlert = false
     @State private var newDeckName = ""
     @State private var deckPendingRename: Deck?
     @State private var renameText = ""
+
+    @State private var importViewModel: ImportViewModel?
+    @State private var isPresentingImporter = false
+
+    private static let apkgContentTypes = [
+        UTType(filenameExtension: "apkg") ?? .data,
+        UTType(filenameExtension: "colpkg") ?? .data,
+    ]
 
     var body: some View {
         Group {
@@ -27,11 +37,20 @@ struct DeckListView: View {
                 }
             }
             ToolbarItem(placement: .primaryAction) {
-                Button {
-                    newDeckName = ""
-                    isPresentingNewDeckAlert = true
+                Menu {
+                    Button {
+                        newDeckName = ""
+                        isPresentingNewDeckAlert = true
+                    } label: {
+                        Label("New Deck", systemImage: "plus")
+                    }
+                    Button {
+                        isPresentingImporter = true
+                    } label: {
+                        Label("Import Deck…", systemImage: "square.and.arrow.down")
+                    }
                 } label: {
-                    Label("Add Deck", systemImage: "plus")
+                    Label("Add", systemImage: "plus")
                 }
             }
         }
@@ -54,10 +73,41 @@ struct DeckListView: View {
         } message: {
             Text(viewModel?.errorMessage ?? "")
         }
+        .fileImporter(isPresented: $isPresentingImporter, allowedContentTypes: Self.apkgContentTypes) { result in
+            if case .success(let url) = result {
+                importViewModel?.importDeck(from: url)
+            }
+        }
+        .alert("Import Error", isPresented: importErrorBinding) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(importViewModel?.errorMessage ?? "")
+        }
+        .alert("Import Complete", isPresented: importSummaryBinding) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            if let summary = importViewModel?.summary {
+                Text("Imported \(summary.deckCount) deck(s), \(summary.noteCount) notes, \(summary.cardCount) cards, and \(summary.mediaFileCount) media files.")
+            }
+        }
+        .overlay {
+            if importViewModel?.isImporting == true {
+                ProgressView("Importing…")
+                    .padding(24)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            }
+        }
         .onAppear {
             let vm = viewModel ?? DeckListViewModel(database: database)
             viewModel = vm
             vm.refresh()
+
+            let importVM = importViewModel ?? ImportViewModel(database: database, mediaStore: mediaStore)
+            importViewModel = importVM
+        }
+        .onChange(of: importViewModel?.summary) { _, newValue in
+            guard newValue != nil else { return }
+            viewModel?.refresh()
         }
     }
 
@@ -67,6 +117,14 @@ struct DeckListView: View {
 
     private var errorBinding: Binding<Bool> {
         Binding(get: { viewModel?.errorMessage != nil }, set: { if !$0 { viewModel?.errorMessage = nil } })
+    }
+
+    private var importErrorBinding: Binding<Bool> {
+        Binding(get: { importViewModel?.errorMessage != nil }, set: { if !$0 { importViewModel?.errorMessage = nil } })
+    }
+
+    private var importSummaryBinding: Binding<Bool> {
+        Binding(get: { importViewModel?.summary != nil }, set: { if !$0 { importViewModel?.summary = nil } })
     }
 
     @ViewBuilder

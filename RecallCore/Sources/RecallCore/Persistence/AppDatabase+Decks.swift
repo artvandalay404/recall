@@ -24,10 +24,11 @@ public extension AppDatabase {
     }
 
     @discardableResult
-    func createDeck(name: String) throws -> Deck {
+    func createDeck(name: String, parentID: String? = nil) throws -> Deck {
         try dbWriter.write { db in
-            let deck = Deck(name: name)
+            let deck = Deck(parentID: parentID, name: name)
             try deck.insert(db)
+            try db.enqueueSyncChange(.deck, recordID: deck.id)
             return deck
         }
     }
@@ -39,6 +40,7 @@ public extension AppDatabase {
             updated.name = name
             updated.updatedAt = Date()
             try updated.update(db)
+            try db.enqueueSyncChange(.deck, recordID: updated.id)
             return updated
         }
     }
@@ -46,6 +48,7 @@ public extension AppDatabase {
     func deleteDeck(_ deck: Deck) throws {
         _ = try dbWriter.write { db in
             try deck.delete(db)
+            try db.enqueueSyncChange(.deck, recordID: deck.id, isDeletion: true)
         }
     }
 }

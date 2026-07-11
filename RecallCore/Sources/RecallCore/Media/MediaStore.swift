@@ -46,4 +46,17 @@ public struct MediaStore: Sendable {
     public func url(for filename: String) -> URL {
         directory.appendingPathComponent(filename)
     }
+
+    /// Copies `sourceURL` into the media directory under an exact, caller-
+    /// chosen `filename` — unlike `importFile`/`importData`, which mint a
+    /// fresh unique name. Used when receiving a synced media file (PRD §7.8)
+    /// that must land under the same filename local note field HTML already
+    /// references.
+    public func store(_ sourceURL: URL, as filename: String) throws {
+        let destination = url(for: filename)
+        if FileManager.default.fileExists(atPath: destination.path) {
+            try FileManager.default.removeItem(at: destination)
+        }
+        try FileManager.default.copyItem(at: sourceURL, to: destination)
+    }
 }

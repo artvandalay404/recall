@@ -23,6 +23,11 @@ public struct Card: Codable, Equatable, Identifiable, Sendable {
     public var due: Date
     public var lastReview: Date?
 
+    /// When this card's fields last changed, independent of `due`/`lastReview`
+    /// churn — the timestamp CloudKit sync (PRD §7.8) compares to resolve a
+    /// last-writer-wins conflict per card.
+    public var updatedAt: Date
+
     public init(
         id: String = UUID().uuidString,
         noteID: String,
@@ -33,7 +38,8 @@ public struct Card: Codable, Equatable, Identifiable, Sendable {
         stability: Double? = nil,
         difficulty: Double? = nil,
         due: Date = Date(),
-        lastReview: Date? = nil
+        lastReview: Date? = nil,
+        updatedAt: Date = Date()
     ) {
         self.id = id
         self.noteID = noteID
@@ -45,6 +51,7 @@ public struct Card: Codable, Equatable, Identifiable, Sendable {
         self.difficulty = difficulty
         self.due = due
         self.lastReview = lastReview
+        self.updatedAt = updatedAt
     }
 }
 

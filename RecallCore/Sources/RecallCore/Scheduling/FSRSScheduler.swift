@@ -119,6 +119,7 @@ public struct FSRSScheduler: Sendable {
 
         card.due = reviewDate.addingTimeInterval(interval)
         card.lastReview = reviewDate
+        card.updatedAt = reviewDate
 
         let reviewLog = ReviewLog(cardID: card.id, rating: rating, reviewedAt: reviewDate)
         return (card, reviewLog)
